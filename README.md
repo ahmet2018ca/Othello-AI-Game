@@ -1,38 +1,156 @@
-# Game-Theoretic Othello AI Engine
+<div align="center">
 
-This project is a technical, command-line Othello engine written in Oracle Java 26. It was designed as a clean demonstration of classic game AI engineering: immutable state modeling, bitboard-based move generation, minimax-style adversarial search, alpha-beta pruning, heuristic evaluation, and late-game exact solving.
+# 🧠⚫ Othello AI Engine ⚪
 
-The result is a playable CLI game with two play modes:
+### High-performance game-tree search, bitboards, and exact endgame solving in Oracle Java 26
 
-- `Human vs Human` for local 1v1 play on the same machine
-- `Human vs AI` with four difficulties: `Easy`, `Medium`, `Hard`, and `Godlike`
+<p>
+  <img alt="Oracle JDK 26" src="https://img.shields.io/badge/Oracle%20JDK-26-F80000?style=for-the-badge&logo=oracle&logoColor=white" />
+  <img alt="CLI Game" src="https://img.shields.io/badge/Interface-CLI-1F6FEB?style=for-the-badge&logo=windows-terminal&logoColor=white" />
+  <img alt="Bitboards" src="https://img.shields.io/badge/Board-Bitboards-6F42C1?style=for-the-badge" />
+  <img alt="Search" src="https://img.shields.io/badge/AI-Negamax%20%2B%20Alpha--Beta-0A7E8C?style=for-the-badge" />
+  <img alt="Endgame Solving" src="https://img.shields.io/badge/Endgame-Exact%20Solving-D73A49?style=for-the-badge" />
+</p>
 
-The strongest mode is intentionally difficult to beat. It searches deeply, orders moves aggressively, caches previously analyzed states, and becomes much more exact as the board approaches the endgame.
+<p>
+  <strong>Playable from the terminal. Engineered like a serious board-game AI.</strong>
+</p>
 
-## Project Goals
+</div>
 
-This engine was built to feel like a serious systems-and-algorithms project rather than a toy implementation. The main goals were:
+> [!IMPORTANT]
+> This is not just a simple CLI board game. Under the hood, it is a compact adversarial AI system built with immutable state, fast bitwise board logic, pruning-heavy search, cached positions, and phase-aware evaluation.
 
-- build the full Othello ruleset cleanly around immutable board state
-- make move generation fast enough to support deeper search
-- create AI difficulty tiers that feel meaningfully different in play
-- expose the whole system through a simple, usable CLI
-- keep the code organized and readable so the design is easy to explain
+## 👀 In One Minute
 
-## Core Features
+| Question | Answer |
+| --- | --- |
+| **What is it?** | A playable command-line Othello engine written in Oracle Java 26. |
+| **Why does it feel high-tech?** | It uses bitboards, negamax search, alpha-beta pruning, move ordering, a transposition table, and exact late-game solving. |
+| **Why is that impressive?** | Those are the same kinds of ideas used in serious turn-based game engines to search deeper and make stronger decisions faster. |
+| **What can it do?** | `Human vs Human`, `Human vs AI`, `hint`, `moves`, `undo`, `help`, and `quit`. |
+| **What makes the AI interesting?** | Four difficulty tiers, phase-aware evaluation, and a brutal `Godlike` mode that becomes much more exact near the endgame. |
 
-- Oracle Java 26 implementation with straightforward build, run, and test scripts
-- high-performance two-bitboard board representation using `long` values
-- legal move generation and flip resolution across all eight directions
-- minimax-style negamax search with alpha-beta pruning
-- principal variation search style re-search for stronger pruning
-- transposition table for caching previously explored positions
-- killer-move and history-heuristic move ordering
-- heuristic evaluator that changes emphasis over opening, midgame, and endgame
-- exact late-game deepening when the number of empty squares becomes small enough
-- CLI support for `Human vs Human`, `Human vs AI`, `hint`, `moves`, `undo`, and `quit`
+## ✨ Why This Stands Out
 
-## Project Layout
+- 🧠 **It is real AI engineering, not just menu logic.** Every move comes from adversarial search, pruning, heuristics, and cached analysis.
+- ⚡ **It is performance-minded.** The board is stored as two 64-bit bitboards, which makes move generation compact and fast.
+- 🎯 **It is both playable and explainable.** You can demo it live, then talk through the exact algorithms behind the decisions.
+- 🧱 **It shows clean software design.** The code is separated into engine, AI, CLI, app entrypoint, and shared model layers.
+- 🔥 **It scales from casual to scary.** `Easy` is approachable, while `Godlike` is designed to be genuinely hard to beat.
+
+## 💼 Why This Repo Looks Strong on GitHub
+
+- `Algorithms you can talk about:` negamax, alpha-beta pruning, transposition tables, killer moves, history heuristics, and heuristic evaluation.
+- `Performance choices that sound serious:` bitboards, directional bit operations, iterative deepening, and exact endgame solving.
+- `Software engineering depth:` immutable board state, clear package boundaries, and scriptable build/run/test workflows.
+- `Demo value:` this is not just theory on a page; people can launch it and immediately feel the difference between difficulty levels.
+
+## ⚡ Quick Start
+
+You need Oracle JDK 26 installed.
+
+Official docs:
+- [Java 26 Documentation](https://docs.oracle.com/en/java/javase/26/)
+
+Open a terminal in the project root and verify Java:
+
+```powershell
+java -version
+javac -version
+```
+
+This project compiles with:
+
+```powershell
+javac --release 26
+```
+
+Build the project:
+
+```powershell
+.\build.ps1
+```
+
+Run the game:
+
+```powershell
+.\run.ps1
+```
+
+Run smoke tests:
+
+```powershell
+.\test.ps1
+```
+
+The smoke tests check opening legality, flip correctness, AI move legality across all difficulty modes, and forced-pass handling.
+
+If PowerShell blocks local scripts, use:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build.ps1
+powershell -ExecutionPolicy Bypass -File .\run.ps1
+powershell -ExecutionPolicy Bypass -File .\test.ps1
+```
+
+Batch wrappers are also included:
+
+```bat
+build.bat
+run.bat
+test.bat
+```
+
+## 🎮 What You Can Do
+
+### Game Modes
+
+- `Human vs Human` for local same-machine play
+- `Human vs AI` with `Easy`, `Medium`, `Hard`, and `Godlike`
+- a launcher menu with gameplay and rules options
+
+### Controls
+
+Enter moves with coordinates like:
+
+- `D3`
+- `C4`
+- `F5`
+- `H8`
+
+Board symbols:
+
+- `B` = black discs
+- `W` = white discs
+- `*` = legal moves
+- `?` = current hint square
+- `.` = empty squares that are not currently legal
+
+In-game commands:
+
+- `hint` = ask the engine for its recommended move
+- `moves` = print the current legal move list
+- `undo` = rewind one ply
+- `help` = show rules and controls
+- `quit` = return to the main menu
+
+Black always moves first. If a player has no legal move, the engine automatically passes. The game ends when neither side can move.
+
+## 🧠 AI Highlights
+
+| 🔧 Component | 🚀 Why it matters |
+| --- | --- |
+| `Bitboard state model` | Stores the entire board in two `long` values for fast occupancy checks and move generation. |
+| `Negamax search` | Reuses a clean minimax-style formulation for both players in a zero-sum game. |
+| `Alpha-beta pruning` | Cuts away branches that cannot improve the current best result. |
+| `Move ordering` | Searches strong candidate moves first so pruning becomes much more effective. |
+| `Transposition table` | Reuses work for previously explored positions instead of recalculating them. |
+| `Killer + history heuristics` | Pushes cutoff-causing or historically strong moves earlier in future searches. |
+| `Phase-aware evaluator` | Changes what it values across opening, midgame, and endgame. |
+| `Exact late-game solving` | Stops guessing late and pushes toward exact calculation as the board empties. |
+
+## 📁 Project Layout
 
 ```text
 src/main/java/com/othello
@@ -46,189 +164,50 @@ src/test/java/com/othello/test
   OthelloTestRunner.java
 ```
 
-## Prerequisites
+## 🧪 Difficulty Profiles
 
-You need Oracle JDK 26 installed.
+| Difficulty | Search Style | Time Budget | Depth Ceiling | Personality |
+| --- | --- | --- | --- | --- |
+| `Easy` | iterative deepening | `125 ms` | `3` | tactical, lighter, intentionally a little less perfect |
+| `Medium` | iterative deepening | `400 ms` | `5` | balanced and more positional |
+| `Hard` | iterative deepening | `1250 ms` | `8` | serious search with stronger endgame transition |
+| `Godlike` | iterative deepening | `3250 ms` | `12` | deepest search and the most aggressive exact late-game play |
 
-Official Oracle Java 26 docs:
-- [Java 26 Documentation](https://docs.oracle.com/en/java/javase/26/)
+## 🔬 Technical Deep Dive
 
-To confirm Java is available:
+<details>
+<summary><strong>Architecture overview</strong></summary>
 
-```powershell
-java -version
-javac -version
-```
-
-Expected output should show Java 26. This project was built around Oracle Java 26 and compiles with:
-
-```powershell
-javac --release 26
-```
-
-## Setup
-
-1. Open a terminal in the project root:
-
-```text
-C:\CODES\RESUME__PROJECTS\OTHELLO__GAME\Othello-AI-Game
-```
-
-2. If you want to verify the toolchain first:
-
-```powershell
-java -version
-javac -version
-```
-
-3. Build the project:
-
-```powershell
-.\build.ps1
-```
-
-If PowerShell execution policy blocks local scripts, run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\build.ps1
-```
-
-You can also use the batch wrapper:
-
-```bat
-build.bat
-```
-
-## Running the Game
-
-The simplest way to start the game is:
-
-```powershell
-.\run.ps1
-```
-
-If script execution is restricted:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\run.ps1
-```
-
-Or with the batch file:
-
-```bat
-run.bat
-```
-
-When the program launches, it opens a menu:
-
-- `1. Human vs Human`
-- `2. Human vs AI`
-- `3. Rules and Controls`
-- `4. Exit`
-
-If you choose `Human vs AI`, the program then asks:
-
-- which difficulty you want
-- whether you want to play as Black or White
-
-Black always moves first in Othello.
-
-## How to Play
-
-Each move is entered using board coordinates such as:
-
-- `D3`
-- `C4`
-- `F5`
-- `H8`
-
-The board uses:
-
-- `B` for black discs
-- `W` for white discs
-- `*` for legal moves
-- `?` for the current hint square
-- `.` for empty non-playable squares at that moment
-
-During a game, you can use these commands:
-
-- `hint`: asks the engine for its recommended move
-- `moves`: prints the current legal move list
-- `undo`: rewinds one ply
-- `help`: prints the rules and controls
-- `quit`: returns to the main menu
-
-If a player has no legal move, the engine automatically performs a pass. The game ends when neither side can move, and the side with more discs wins.
-
-## Example Play Flow
-
-Typical session:
-
-1. Launch the game with `.\run.ps1`
-2. Choose `2` for `Human vs AI`
-3. Choose a difficulty such as `4` for `Godlike`
-4. Choose your color
-5. Enter moves like `D3`, `C3`, `F6`
-6. Use `hint` when you want engine analysis
-7. Use `undo` if you want to step back one move
-8. Finish the game and read the final score summary
-
-## Building and Testing
-
-Build main sources:
-
-```powershell
-.\build.ps1
-```
-
-Run smoke tests:
-
-```powershell
-.\test.ps1
-```
-
-Batch wrappers are also included:
-
-```bat
-test.bat
-```
-
-The smoke test runner checks:
-
-- initial position legality
-- opening flip correctness
-- that every AI difficulty returns legal moves
-- pass handling in a forced-pass position
-
-## AI Architecture
-
-The AI in this project is not a machine-learning model. It is a classical game-tree search engine. The difficulty levels are different search configurations over the same core engine rather than separately trained models.
+This project is a classical game-tree engine, not a machine-learning model. The AI strength comes from search quality, pruning efficiency, move ordering, cached positions, and evaluation design.
 
 At a high level, the engine works like this:
 
-1. represent the board as two bitboards
-2. generate all legal moves for the current side
-3. recursively analyze future positions with negamax
-4. prune branches with alpha-beta bounds
-5. order strong candidate moves first to improve pruning
-6. score non-terminal positions with a heuristic evaluator
-7. switch into deeper or exact play as the endgame approaches
+1. Represent the position as two bitboards.
+2. Generate all legal moves for the current side.
+3. Search future positions with negamax.
+4. Prune branches using alpha-beta bounds.
+5. Try stronger candidate moves earlier to improve pruning.
+6. Score non-terminal positions with a weighted evaluator.
+7. Push toward exact solving as the endgame approaches.
 
-## Bitboard Representation
+</details>
+
+<details>
+<summary><strong>Bitboard representation</strong></summary>
 
 The board is stored using two 64-bit integers:
 
-- one `long` for all black discs
-- one `long` for all white discs
+- one `long` for black discs
+- one `long` for white discs
 
-Each bit corresponds to one square on the 8x8 board. This representation is fast, compact, and very well suited to Othello because:
+Each bit maps to one square on the 8x8 board. That makes the representation fast, compact, and ideal for Othello because:
 
-- occupancy checks become simple bit tests
+- occupancy checks become bit tests
 - move generation becomes directional bit shifting
 - flips can be resolved with low-level bitwise operations
-- the state is small enough to copy safely for immutable search nodes
+- immutable state copies stay lightweight enough for search
 
-The rule engine uses directional flood-style scans and directional capture checks over all eight directions:
+The rule engine checks all eight directions:
 
 - north
 - south
@@ -239,116 +218,91 @@ The rule engine uses directional flood-style scans and directional capture check
 - southeast
 - southwest
 
-This allows legal moves and flips to be determined without storing a mutable 2D object graph.
+</details>
 
-## Search Engine
+<details>
+<summary><strong>Search stack</strong></summary>
 
-The search engine is implemented in a negamax formulation of minimax. Negamax is especially clean for two-player zero-sum games because the same logic can be reused for both sides by negating scores during recursion.
-
-The search includes several important optimizations:
+The search engine uses a negamax formulation of minimax plus several performance upgrades:
 
 - `Alpha-beta pruning`
-  Cuts off branches that cannot improve the current best line.
+  Removes branches that cannot improve the current line.
 
 - `Iterative deepening`
-  Searches depth 1, then 2, then 3, and so on until the configured limit or time budget is reached.
+  Searches depth 1, then 2, then 3, and so on until the depth or time budget is reached.
 
 - `Principal variation search behavior`
-  The first move is searched with a full window; later moves are often searched with a narrower window and only re-searched if they look promising.
+  Searches the first move with a full window, then uses narrower windows for later moves and re-searches only when needed.
 
 - `Transposition table`
-  Previously seen positions are cached with depth and bound metadata so the engine can reuse work.
+  Caches previously seen positions with depth and bound information.
 
 - `Killer moves`
-  Moves that caused cutoffs at a given ply are remembered and tried earlier in similar future nodes.
+  Remembers cutoff-causing moves at a given ply and tries them earlier in similar future nodes.
 
 - `History heuristic`
-  Moves that have historically performed well receive better ordering priority later.
+  Boosts moves that have repeatedly performed well across the search.
 
 - `Late-game exact deepening`
-  When the number of empty squares is small enough, the engine increases search depth toward exact play instead of relying only on heuristics.
+  Increases search depth toward exact play when the number of empty squares gets low enough.
 
-These optimizations are what allow the stronger difficulties to become genuinely dangerous.
+These optimizations are what make the stronger modes feel substantially smarter instead of just slower.
 
-## Evaluation Function
+</details>
 
-When the engine reaches a non-terminal node at the search horizon, it estimates the quality of the position using a weighted heuristic evaluation.
+<details>
+<summary><strong>Evaluation function</strong></summary>
 
-The evaluator blends:
+When the search reaches a non-terminal position at its horizon, the evaluator blends multiple signals:
 
 - `Disc differential`
-  Raw count difference between the current player and the opponent.
-
 - `Mobility`
-  How many legal moves each side currently has.
-
 - `Potential mobility`
-  How many empty squares sit adjacent to opponent discs and may become playable soon.
-
 - `Corner occupancy`
-  Corners are extremely valuable because they cannot be flipped once secured.
-
 - `Frontier discs`
-  Discs adjacent to empty squares are usually less stable and easier to attack.
-
+- `Stable edge presence`
 - `Positional square weights`
-  Stable and strategically important squares get positive scores, while risky squares near empty corners are penalized.
-
-- `Corner pressure / X-square and C-square risk`
-  Squares diagonally adjacent or edge-adjacent to an empty corner are often dangerous, so the evaluator penalizes taking them too early.
-
+- `X-square and C-square corner pressure`
 - `Parity`
-  In many late-game situations, move parity matters, so the evaluator includes a parity signal based on remaining empties.
 
-The weights are phase-aware. The engine emphasizes mobility and position more in the opening and midgame, then gradually increases the value of disc count and exact conversion as the board fills up.
+The weights are phase-aware. Opening and midgame positions lean more heavily on mobility, potential mobility, frontier safety, and positional control. As the board fills up, disc count and parity matter more.
 
-## Difficulty Modes
+</details>
 
-The difficulty levels are implemented as search profiles, not separate engines.
-
-- `Easy`
-  Shallow tactical search with a short time budget and a randomness window. It can still find good moves, but it intentionally does not always choose the absolute best one.
-
-- `Medium`
-  Deeper search with better positional judgment and less randomness. This level starts to punish careless corner concessions and bad mobility decisions.
-
-- `Hard`
-  Serious search depth with strong move ordering and a more aggressive endgame transition. This level is designed to feel competitive.
-
-- `Godlike`
-  The strongest configuration in the project. It searches deeper, uses a longer time budget, and transitions into exact endgame solving more aggressively. It is intentionally difficult to outplay in a long strategic game.
-
-## Design Decisions
-
-Several design choices were made on purpose:
+<details>
+<summary><strong>Why the design choices are strong</strong></summary>
 
 - `Immutable board state`
-  Search code is easier to reason about when each move creates a fresh state instead of mutating shared objects.
+  Makes the search logic easier to reason about and safer to extend.
 
 - `Bitboards over arrays`
-  Othello benefits heavily from compact bit-level operations, especially for move generation and flip resolution.
+  Lets the engine use compact, low-level operations where Othello benefits most.
 
-- `CLI instead of GUI`
-  The command-line interface keeps the focus on engine quality, algorithms, and clean game flow.
+- `CLI over GUI`
+  Keeps the focus on the engine, algorithms, and game flow instead of UI overhead.
 
-- `Script-based build`
-  The project currently uses PowerShell and batch wrappers so it can run immediately with just Oracle JDK 26 installed.
+- `Script-based workflow`
+  Makes the project easy to build, run, and test with a minimal setup.
 
-## Troubleshooting
+</details>
+
+<details>
+<summary><strong>Troubleshooting</strong></summary>
 
 - `PowerShell says scripts are disabled`
-  Use:
-  `powershell -ExecutionPolicy Bypass -File .\run.ps1`
+  Use `powershell -ExecutionPolicy Bypass -File .\run.ps1`
 
 - `java` or `javac` is not recognized
   Make sure Oracle JDK 26 is installed and added to `PATH`.
 
 - `The game does not start from the right folder`
-  Open your terminal inside the project root before running scripts.
+  Open the terminal inside the project root before running scripts.
 
 - `I want to verify the installation`
   Run `.\build.ps1` and then `.\test.ps1`.
 
-## Summary
+</details>
 
-This project is a game-theoretic Othello engine built to showcase strong Java fundamentals, object-oriented design, algorithmic thinking, and adversarial AI implementation. It combines clean domain modeling with a search-heavy engine that can scale from casual play to a genuinely punishing `Godlike` mode, all inside a lightweight CLI application.
+## 🏁 Summary
+
+This project takes a familiar board game and turns it into a compact showcase of Java architecture, algorithmic thinking, and classical AI engineering. It is easy to run, easy to demo, and technically rich enough to talk about search, heuristics, optimization, and clean systems design with confidence.
